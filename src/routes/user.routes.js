@@ -1,18 +1,16 @@
 import { Router } from "express";
 
+import { login, signup } from "../controllers/user.controller.js";
+
 const router = Router();
 
-router.post("/login", (req, res) => {
-  const { username, password } = req.body;
-});
+router.post("/login", login);
 
 router.post("/prev-login", (req, res) => {
   const { user_id } = req.body;
 });
 
-router.post("/register", (req, res) => {
-  const { display_name, username, password } = req.body;
-});
+router.post("/register", signup);
 
 router.get("/", (req, res) => {
   const { user_id } = req.params;

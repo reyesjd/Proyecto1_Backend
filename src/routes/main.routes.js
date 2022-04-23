@@ -1,10 +1,10 @@
 import { Router } from "express";
 import message from "../utils/message.util.js"; // import message_format from "./utils/message.util";
-import user_routes from "./users.routes.js";
-import post_routes from "./posts.routes.js";
+import user_routes from "./user.routes.js";
+import post_routes from "./post.routes.js";
 import cart_routes from "./cart.routes.js";
 import history_routes from "./history.routes.js";
-import review_routes from "./reviews.routes.js";
+import review_routes from "./review.routes.js";
 
 const router = Router();
 
