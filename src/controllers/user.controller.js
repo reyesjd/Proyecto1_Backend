@@ -10,9 +10,9 @@ export const login = async (req, res) => {
       !username ||
       !password ||
       username?.length == 0 ||
-      password?.length == 3
+      password?.length == 0
     ) {
-      return message(res, "Username or password is empty", 400);
+      return message(res, "El usuario o la contraseña esta vacia.", 400);
     }
 
     const user = await userModel.findOne({ username });
@@ -86,5 +86,50 @@ export const signup = async (req, res) => {
       "En este momento no se puede crear el usuario, por intente mas tarde.",
       500
     );
+  }
+};
+
+export const prevLogin = async (req, res) => {
+  try {
+    const { user_id } = req.body;
+
+    if (!user_id) {
+      return message(res, "El usuario no existe!", 404);
+    }
+
+    const user = await userModel.findOne({ _id: user_id });
+
+    if (!user) {
+      return message(res, "El usuario no existe!", 404);
+    }
+
+    return message(res, "Sesión valida!", 200, {
+      _id: user._id,
+    });
+  } catch (error) {
+    return message(res, "En este momento no se puede validar la sesión.", 500);
+  }
+};
+
+export const getUser = async (req, res) => {
+  try {
+    const { user_id } = req.query;
+    if (!user_id) {
+      return message(res, "El usuario no existe!", 404);
+    }
+
+    const user = await userModel.findOne({ _id: user_id });
+    if (!user) {
+      return message(res, "El usuario no existe!", 404);
+    }
+
+    return message(res, "Usuario encontrado!", 200, {
+      _id: user._id,
+      display_name: user.display_name,
+      username: user.username,
+    });
+  } catch (error) {
+    console.log(error);
+    return message(res, "En este momento no se puede obtener el usuario.", 500);
   }
 };
