@@ -15,6 +15,6 @@ router.post("/prev-login", prevLogin);
 
 router.post("/register", signup);
 
-router.get("/", getUser);
+router.get("", getUser);
 
 export default router;
