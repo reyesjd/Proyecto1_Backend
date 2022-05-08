@@ -68,7 +68,7 @@ export const buyCart = async (req, res) => {
       return message(res, "User ID es requerido", 400);
     }
 
-    cartModel
+    await cartModel
       .updateMany(
         { user_id, state: true },
         { $set: { state: false, wasBought: true } }
